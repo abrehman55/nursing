@@ -110,18 +110,9 @@ class UserController extends Controller
     }
 
     public function updateUser(Request $request){
-        return 'data';
         $user =Auth::guard('api')->user();
 
-        $user->update([
-            'name' =>$request->name,
-            'image' => $request->image,
-            'email' => $request->email,
-            'password' => $request->password,
-            'type' => $request->type,
-            'lat' => $request->lat,
-            'long' => $request->long,
-        ]);
+        $user->update($request->all());
         $user->category;
 
         return Api::setResponse('user',$user);
