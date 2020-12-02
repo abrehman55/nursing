@@ -1,0 +1,9 @@
+@media print {
+    html{
+        -webkit-print-color-adjust: exact;
+    }
+
+    .myFont{
+        font-weight: bolder;
+    }
+}
