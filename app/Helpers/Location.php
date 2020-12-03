@@ -22,6 +22,10 @@ class Location
     }
     
     public static function diatance($target ,$origin){
+            echo $target;
+            echo $origin;
+            die();
+
             $longitude1 = self::getCoordinate($target,'x');
             $latitude1 = self::getCoordinate($target,'y');
             $longitude2 = self::getCoordinate($origin,'x');
