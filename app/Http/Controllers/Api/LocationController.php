@@ -21,8 +21,8 @@ class LocationController extends Controller
         }
 
         $nurses = collect($nurses);
-        $nurses->sortBy('distance');
+        $sorted = $nurses->sortBy('distance');
 
-        return Api::setResponse('nearby_nurses', $nurses);
+        return Api::setResponse('nearby_nurses', $sorted);
     }
 }
