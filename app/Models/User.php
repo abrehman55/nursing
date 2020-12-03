@@ -71,7 +71,6 @@ class User extends Authenticatable
 
     public static function registerRules()
     {
-
         return[
 
             'name' => 'max:255|required',
@@ -79,9 +78,9 @@ class User extends Authenticatable
             'password' => 'min:4|required',
         ];
     }
+
        public static function loginRules()
     {
-
         return[
 
             'email' => 'email|required',
@@ -109,6 +108,13 @@ class User extends Authenticatable
 
     public function category(){
         return $this->belongsTo(Category::class,'cat_id');
+    }
+
+    public function getTypeAttribute($value){
+        if($value == 'user')
+            return 1;
+        else 
+            return 2;
     }
     
  
