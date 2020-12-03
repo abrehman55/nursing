@@ -45,7 +45,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::post('nurse/update', 'UserController@updateNurse');
 
         Route::post('user/update', 'UserController@updateUser');
-        Route::post('fetch/jobs', 'JobController@fetch_jobs');
+        Route::post('fetch/jobs', 'JobController@fetch_jobs');//All jobs
         Route::post('apply/request', 'ApplyController@apply');
 
         Route::post('job/store', 'JobController@store');
@@ -54,6 +54,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
         Route::post('nearby/nurse', 'LocationController@nearbyNurses');
         Route::post('nearby/hospital', 'LocationController@nearbyHospitals');
+        
+        Route::post('jobs', 'JobController@jobs');//Auth User jobs
+        Route::post('user/jobs', 'JobController@userJobs');//Any User jobs
 
 
         Route::post('hire/request', 'HireController@request');

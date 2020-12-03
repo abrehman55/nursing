@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -106,5 +107,15 @@ class JobController extends Controller
             $job->user;
         }
         return Api::setResponse('jobs',$jobs);
+    }
+    
+    public function jobs(){
+        $user = Auth::user();
+        return Api::setResponse('jobs',$user->jobs);
+    }
+    
+    public function userJobs(Request $request){
+        $user = User::find($request->user_id);
+        return Api::setResponse('jobs',$user->jobs);
     }
 }

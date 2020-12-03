@@ -111,6 +111,10 @@ class User extends Authenticatable
         return $this->belongsTo(Category::class,'cat_id');
     }
 
+    public function jobs(){
+        return $this->hasMany(Job::class);
+    }
+
     public function getTypeAttribute($value){
         if($value == 'user')
             return 1;
