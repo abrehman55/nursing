@@ -40,7 +40,7 @@ class Location
             
             return $d;
         } catch(Exception $e) {
-            return 9999999999;
+            return false;
         }
             
     }
