@@ -95,7 +95,7 @@ class UserController extends Controller
     {
 
         $user = Auth::guard('api')->user();
-        $user->update($request->all());
+        // $user->update($request->all());
         if ($request->qualifications) {
 
             foreach ($request->qualifications as $item) {

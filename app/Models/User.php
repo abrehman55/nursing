@@ -117,6 +117,16 @@ class User extends Authenticatable
         else 
             return 2;
     }
+
+    public function setLatAttribute($value){
+        $this->attributes['location'] = $value.', ';
+        $this->attributes['lat'] = $value;
+    }
+    
+    public function setLongAttribute($value){
+        $this->attributes['location'] = $this->attributes['location'].$value;
+        $this->attributes['long'] = $value;
+    }
     
  
 
