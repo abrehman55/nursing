@@ -100,7 +100,7 @@ class UserController extends Controller
 
             foreach ($request->qualifications as $item) {
 
-                $qual = Qualification::where('degree', $item->degree)->where('institude', $item->institude)->first();
+                $qual = Qualification::where('degree', $item['degree'])->where('institude', $item->institude)->first();
                 if (!$qual) {
                     Qualification::updateOrCreate([
                         'user_id' => $user->id,
