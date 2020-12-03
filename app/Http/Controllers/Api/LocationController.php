@@ -17,11 +17,7 @@ class LocationController extends Controller
         $nurses = User::where('genre','2')->get();
         
         foreach($nurses as $nurse){
-            // try{
-                $nurse->distance = Location::diatance($nurse->location, $user->location);
-            // } catch(Exception $e){
-            //     return Api::setError('Please update your location');
-            // }
+            $nurse->distance = Location::diatance($nurse->location, $user->location);
         }
 
         $nurses->sortBy('distance');

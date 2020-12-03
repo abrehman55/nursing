@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use Exception;
+
 class Location
 {
     public static function isWithInRadius($target ,$origin, $radius){
@@ -22,10 +24,7 @@ class Location
     }
     
     public static function diatance($target ,$origin){
-            echo $target . '   ---   ';
-            echo $origin;
-            die();
-
+        try{
             $longitude1 = self::getCoordinate($target,'x');
             $latitude1 = self::getCoordinate($target,'y');
             $longitude2 = self::getCoordinate($origin,'x');
@@ -40,6 +39,10 @@ class Location
             $d = $earth_radius * $c;  
             
             return $d;
+        } catch(Exception $e) {
+            return 9999999999;
+        }
+            
     }
 
     private static function getCoordinate($location,$option){
