@@ -128,7 +128,7 @@ class UserController extends Controller
         $user->specifications;
         $user->category;
 
-        return Api::setResponse('nurse', $user);
+        return Api::setResponse('nurse', $user->withToken());
     }
 
     public function nurse_rating(Request $request)
