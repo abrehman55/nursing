@@ -32,9 +32,9 @@ class UserController extends Controller
                 if (!$qual) {
                     Qualification::updateOrCreate([
                         'user_id' => $user->id,
-                        'degree' => $item['degree'],
-                        'institude' => $item['institude'],
-                        'year' => $item['year']
+                        'degree' => $item->degree,
+                        'institude' => $item->institude,
+                        'year' => $item->year
                     ]);
                 }
             }
@@ -44,8 +44,8 @@ class UserController extends Controller
             foreach ($request->specifications as $specification) {
                 Specification::updateOrCreate([
                     'user_id' => $user->id,
-                    'spec_name' => $specification['spec_name'],
-                    'exp' => $specification['exp']
+                    'spec_name' => $specification->spec_name,
+                    'exp' => $specification->exp
                 ]);
             }
         }
