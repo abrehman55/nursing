@@ -24,7 +24,6 @@ class UserController extends Controller
 
         if ($request->qualifications) {
 
-            return $request->qualifications;
 
             foreach ($request->qualifications as $item) {
 
