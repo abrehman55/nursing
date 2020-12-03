@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('api_token');
             $table->string('lat')->nullable();
             $table->string('license_no')->nullable();
+            $table->string('phone')->nullable();
             $table->string('long')->nullable();
             $table->string('location')->nullable();
             $table->string('image')->default('assets/img/user/default.png');

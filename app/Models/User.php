@@ -32,7 +32,8 @@ class User extends Authenticatable
         'image',
         'firebase_token',
         'cat_id',
-        'license_no'
+        'license_no',
+        'phone',
     ];
 
     /**
