@@ -20,7 +20,10 @@ class AuthController extends Controller
         if(Auth::guard('user')->attempt($credentials)){
            
             $user = Auth::guard('user')->user();
+            $user->qualifications;
+            $user->specifications;
             $user->category;
+            
             return Api::setResponse('user',$user->withToken());
         }
         else{

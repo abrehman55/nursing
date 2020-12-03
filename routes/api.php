@@ -24,18 +24,14 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::post('user/register', 'UserController@store');
     Route::post('user/login', 'AuthController@login');
 
-    Route::post('nurse/register', 'NurseController@store');
-    Route::post('nurse/login', 'NurseAuthController@login');
+    // Route::post('nurse/register', 'NurseController@store');
+    // Route::post('nurse/login', 'NurseAuthController@login');
 
     Route::post('get/profile', 'UserController@getProfile');
     Route::post('get/nurse/profile', 'UserController@getProfile');
 
 
     Route::post('all/categories', 'CategoryController@show');
-
-
-
-
 
     Route::group(['middleware' => 'auth:api'], function () {
 

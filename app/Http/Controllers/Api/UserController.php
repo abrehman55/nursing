@@ -19,86 +19,119 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-       $credentials = Validate::register($request,User::class);
-       $user = User::create($credentials);
-       $user = User::find($user->id);
-       $user->category;
-        return Api::setResponse('user',$user->withToken());
-    }
+        $credentials = Validate::register($request, User::class);
+        $user = User::create($credentials);
 
-    public function getProfile(Request $request){
-        $user = User::find($request->user_id);
-        $user->category;
-        return Api::setResponse('user',$user);
+        if ($request->qualifications) {
 
-    }
-    
-    public function authProfile(Request $request){
-        $user =Auth::guard('api')->user();
-        $user->category;
-        return Api::setResponse('user',$user);
+            foreach ($request->qualifications as $item) {
 
-    }
-
-    public function addFavorite(Request $request){
-        $user =Auth::guard('api')->user();
-     
-        FavoriteNurse::create([
-            'user_id' => $user->id,
-            'nurse_id' => $request->nurse_id
-        ]);
-            return Api::setMessage('Favorite Added successfully');
-    }
-    
-    public function getFavorite(Request $request){
-        $user =Auth::guard('api')->user();
-    
-       $favorites=$user->favorites;
-        return Api::setResponse('favorites',$favorites);
-    }
-
-    public function updateNurse(Request $request){
-        
-        $user = Auth::guard('api')->user();
-
-       if($request->qualifications){
-
-        foreach($request->qualifications as $item){
-            
-            $qual = Qualification::where('degree',$item->degree)->where('institude',$item->institude)->first();
-            if(!$qual){
-            Qualification::updateOrCreate([
-                'user_id' => $user->id,
-                'degree' => $item['degree'],
-                'institude' => $item['institude'],
-                'year' => $item['year']
-            ]);
+                $qual = Qualification::where('degree', $item->degree)->where('institude', $item->institude)->first();
+                if (!$qual) {
+                    Qualification::updateOrCreate([
+                        'user_id' => $user->id,
+                        'degree' => $item['degree'],
+                        'institude' => $item['institude'],
+                        'year' => $item['year']
+                    ]);
+                }
+            }
         }
-    }
-       }
 
-        if($request->specifications){
-            foreach($request->specifications as $specification)
-            {
+        if ($request->specifications) {
+            foreach ($request->specifications as $specification) {
                 Specification::updateOrCreate([
-                    'user_id' => $user->id  ,
+                    'user_id' => $user->id,
                     'spec_name' => $specification['spec_name'],
                     'exp' => $specification['exp']
                 ]);
             }
         }
-        
-        
-       $user = Auth::guard('api')->user();
-       $user->qualifications;
-       $user->specifications;
-       $user->category;
 
-       return Api::setResponse('nurse',$user);
-   }
 
-    public function nurse_rating(Request $request){
-        $user =Auth::guard('api')->user();
+        $user = User::find($user->id);
+        $user->qualifications;
+        $user->specifications;
+        $user->category;
+        return Api::setResponse('user', $user->withToken());
+    }
+
+    public function getProfile(Request $request)
+    {
+        $user = User::find($request->user_id);
+        $user->category;
+        return Api::setResponse('user', $user);
+    }
+
+    public function authProfile(Request $request)
+    {
+        $user = Auth::guard('api')->user();
+        $user->category;
+        return Api::setResponse('user', $user);
+    }
+
+    public function addFavorite(Request $request)
+    {
+        $user = Auth::guard('api')->user();
+
+        FavoriteNurse::create([
+            'user_id' => $user->id,
+            'nurse_id' => $request->nurse_id
+        ]);
+        return Api::setMessage('Favorite Added successfully');
+    }
+
+    public function getFavorite(Request $request)
+    {
+        $user = Auth::guard('api')->user();
+
+        $favorites = $user->favorites;
+        return Api::setResponse('favorites', $favorites);
+    }
+
+    public function updateNurse(Request $request)
+    {
+
+        $user = Auth::guard('api')->user();
+
+        if ($request->qualifications) {
+
+            foreach ($request->qualifications as $item) {
+
+                $qual = Qualification::where('degree', $item->degree)->where('institude', $item->institude)->first();
+                if (!$qual) {
+                    Qualification::updateOrCreate([
+                        'user_id' => $user->id,
+                        'degree' => $item['degree'],
+                        'institude' => $item['institude'],
+                        'year' => $item['year']
+                    ]);
+                }
+            }
+        }
+
+        if ($request->specifications) {
+            foreach ($request->specifications as $specification) {
+                Specification::updateOrCreate([
+                    'user_id' => $user->id,
+                    'spec_name' => $specification['spec_name'],
+                    'exp' => $specification['exp']
+                ]);
+            }
+        }
+
+
+        $user = Auth::guard('api')->user();
+        $user->qualifications;
+        $user->specifications;
+        $user->category;
+
+        return Api::setResponse('nurse', $user);
+    }
+
+    public function nurse_rating(Request $request)
+    {
+        $user = Auth::guard('api')->user();
 
         NurseRating::create([
             'user_id' => $user->id,
@@ -107,28 +140,23 @@ class UserController extends Controller
 
         ]);
         return Api::setMessage('rating added succesfully');
-
     }
 
-    public function updateUser(Request $request){
-        $user =Auth::guard('api')->user();
+    public function updateUser(Request $request)
+    {
+        $user = Auth::guard('api')->user();
 
         $user->update($request->all());
         $user->category;
 
-        return Api::setResponse('user',$user);
-
-
-
+        return Api::setResponse('user', $user);
     }
 
-    public function get_nurse_Profile(Request $request){
+    public function get_nurse_Profile(Request $request)
+    {
         $nurse = User::find($request->nurse_id);
         $nurse->category;
 
-        return Api::setResponse('nurse',$nurse);
-
+        return Api::setResponse('nurse', $nurse);
     }
-
-
 }
