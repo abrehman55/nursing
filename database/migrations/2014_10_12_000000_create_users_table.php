@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->foreign('cat_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('api_token');
             $table->string('lat')->nullable();
+            $table->string('license_no')->nullable();
             $table->string('long')->nullable();
             $table->string('location')->nullable();
             $table->string('image')->default('assets/img/user/default.png');

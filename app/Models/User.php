@@ -31,7 +31,8 @@ class User extends Authenticatable
         'location',
         'image',
         'firebase_token',
-        'cat_id'
+        'cat_id',
+        'license_no'
     ];
 
     /**
