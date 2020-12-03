@@ -16,8 +16,12 @@ class LocationController extends Controller
         $user = Auth::guard('api')->user();
         $nurses = User::where('genre','2')->get();
         
-        foreach($nurses as $nurse){
-            $nurse->distance = Location::diatance($nurse->location, $user->location);
+        foreach($nurses as $key => $nurse){
+            $distance = Location::diatance($nurse->location, $user->location);
+            if(!$distance)
+                $nurses->forget($key);
+            else
+                $nurse->distance = $distance;
         }
 
         $sorted = $nurses->sort(function($a, $b) {
