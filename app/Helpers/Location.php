@@ -22,7 +22,7 @@ class Location
     }
     
     public static function diatance($target ,$origin){
-            echo $target;
+            echo $target . '   ---   ';
             echo $origin;
             die();
 
