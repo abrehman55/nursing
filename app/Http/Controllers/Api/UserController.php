@@ -21,6 +21,7 @@ class UserController extends Controller
 
        $credentials = Validate::register($request,User::class);
        $user = User::create($credentials);
+       $user = User::find($user->id);
        $user->category;
         return Api::setResponse('user',$user->withToken());
     }
