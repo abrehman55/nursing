@@ -24,8 +24,6 @@ class UserController extends Controller
 
         if ($request->qualifications) {
 
-            return $request->qualifications;
-
             foreach ($request->qualifications as $item) {
 
                 $qual = Qualification::where('degree', $item->degree)->where('institude', $item->institude)->first();
