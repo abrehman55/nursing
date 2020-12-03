@@ -20,7 +20,13 @@ class LocationController extends Controller
             $nurse->distance = Location::diatance($nurse->location, $user->location);
         }
 
-        $sorted = usort($nurses, [$this, 'sortByDistance']);
+        $sorted = $nurses->sort(function($a, $b) {
+            if ($a->distance == $b->distance) {
+                return 0;
+            }
+        
+            return ($a->distance < $b->distance) ? 1 : -1;
+        });
 
         return Api::setResponse('nearby_nurses', $sorted);
     }
