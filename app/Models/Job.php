@@ -23,7 +23,7 @@ class Job extends Model
    }
 
    public function getAppliedAttribute(){
-        if(ApplyRequest::where('user_id',Auth::user()->id)->where('job_id', $this->id)->first())
+        if(ApplyRequest::where('nurse_id',Auth::user()->id)->where('job_id', $this->id)->first())
             return true;
         else
             return false;
