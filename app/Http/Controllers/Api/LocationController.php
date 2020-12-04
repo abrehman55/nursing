@@ -34,7 +34,7 @@ class LocationController extends Controller
 
         $data['data']=[];
         foreach($sorted as $sort ){ 
-            $data['data'][]=$sort; 
+            $data[]=$sort; 
         }
 
         return Api::setResponse('nearby_nurses', $data);
