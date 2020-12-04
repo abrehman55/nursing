@@ -32,8 +32,9 @@ class LocationController extends Controller
             return ($a->distance < $b->distance) ? -1 : 1;
         });
 
-        return Api::setResponse('nearby_nurses', 'fdsf');
-        return Api::setResponse('nearby_nurses', $sorted->toArray());
+        $new = $sorted->toArray();
+
+        return Api::setResponse('nearby_nurses', $new);
     }
     
     public function nearbyHospitals(Request $request){
