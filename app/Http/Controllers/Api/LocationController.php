@@ -32,7 +32,7 @@ class LocationController extends Controller
             return ($a->distance < $b->distance) ? -1 : 1;
         });
 
-        $data['data']=[];
+        $data=[];
         foreach($sorted as $sort ){ 
             $data[]=$sort; 
         }
@@ -69,7 +69,4 @@ class LocationController extends Controller
     {
         return $a->distance - $b->distance;
     }
-
-
-    
 }
