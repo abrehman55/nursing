@@ -151,7 +151,7 @@ class UserController extends Controller
         $user->update($request->all());
         $user->category;
 
-        return Api::setResponse('user', $user);
+        return Api::setResponse('user', $user->withToken());
     }
 
     public function get_nurse_Profile(Request $request)
