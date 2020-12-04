@@ -6,6 +6,7 @@ use App\Helpers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Hired;
 use App\Models\HireRequest;
+use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,11 @@ class HireController extends Controller
         Hired::create([
             'user_id' => Auth::user()->id
         ]+$request->all());
+
+        $job = Job::find($request->job_id);
+        $job->update([
+            'status' => 'closed'
+        ]);
         return Api::setMessage('Nurse hired successfully');
     }
 }
