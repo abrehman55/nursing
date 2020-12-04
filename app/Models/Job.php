@@ -24,7 +24,7 @@ class Job extends Model
 
    public function applicants(){
        $nurses = [];
-        foreach($this->hasMany(ApplyRequest::class) as $item){
+        foreach(ApplyRequest::where('job_id',$this->id)->get() as $item){
             $nurses[] = User::find($item->nurse_id);
        }
        return $nurses;
