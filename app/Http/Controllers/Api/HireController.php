@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Api;
 use App\Http\Controllers\Controller;
+use App\Models\Hired;
 use App\Models\HireRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,5 +19,13 @@ class HireController extends Controller
             'job_id' => $request->job_id
         ]);
         return Api::setMessage('Request Sent Successfully');
+    }
+    
+    public function now(Request $request){
+        $user = Auth::guard('api')->user();
+        Hired::create([
+            'user_id' => Auth::user()->id
+        ]+$request->all());
+        return Api::setMessage('Nurse hired successfully');
     }
 }
