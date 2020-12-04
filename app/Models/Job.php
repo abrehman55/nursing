@@ -18,6 +18,10 @@ class Job extends Model
        'user_id','title','pay','hours','description','status'
    ];
 
+   protected $hidden = [
+       'status'
+   ];
+
    public function user(){
        return $this->belongsTo(User::class);
    }
