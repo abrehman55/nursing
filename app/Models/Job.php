@@ -23,7 +23,11 @@ class Job extends Model
    }
 
    public function applicants(){
-       return $this->hasMany(ApplyRequest::class)->with('');
+       $nurses = [];
+        foreach($this->hasMany(ApplyRequest::class) as $item){
+            $nurses[] = User::find($item->nurse_id);
+       }
+       return $nurses;
    }
 
    public function getAppliedAttribute(){

@@ -121,7 +121,7 @@ class JobController extends Controller
 
     public function details(Request $request){
         $job = Job::find($request->job_id);
-        $job->applicants;
+        $job->applicants = $job->applicants();
         return Api::setResponse('job', $job);
     }
 }
