@@ -20,8 +20,12 @@ class LocationController extends Controller
             $distance = Location::diatance($nurse->location, $user->location);
             if(!$distance)
                 $nurses->forget($key);
-            else
-                $nurse->distance = $distance;
+            else{
+                if($distance>50)
+                    $nurses->forget($key);
+                else
+                    $nurse->distance = $distance;
+            }
         }
 
         $sorted = $nurses->sort(function($a, $b) {
@@ -48,8 +52,12 @@ class LocationController extends Controller
             $distance = Location::diatance($nurse->location, $user->location);
             if(!$distance)
                 $hospitals->forget($key);
-            else
-                $nurse->distance = $distance;
+            else{
+                if($distance>50)
+                    $hospitals->forget($key);
+                else
+                    $nurse->distance = $distance;
+            }
         }
 
         $sorted = $hospitals->sort(function($a, $b) {
