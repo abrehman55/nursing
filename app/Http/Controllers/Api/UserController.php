@@ -150,6 +150,8 @@ class UserController extends Controller
 
         $user->update($request->all());
         $user->category;
+        $user->qualifications;
+        $user->specifications;
 
         return Api::setResponse('user', $user->withToken());
     }
