@@ -80,13 +80,9 @@ class JobController extends Controller
     public function update(Request $request)
     {
         $job = Job::find($request->job_id);
-        $job->update([
-            'title' => $request->title,
-            'pay' =>$request->pay,
-            'hours' => $request->hours
-        ]);
+        $job->update($request->all());
         return Api::setResponse('job',$job);
-        }
+    }
 
     /**
      * Remove the specified resource from storage.

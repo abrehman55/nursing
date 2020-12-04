@@ -18,38 +18,35 @@ class UserController extends Controller
 {
     public function store(Request $request)
     {
-
         $credentials = Validate::register($request, User::class);
         $user = User::create($credentials);
 
         if ($request->qualifications) {
-
-            return $request->qualifications;
-
-            foreach ($request->qualifications as $item) {
-
-                $qual = Qualification::where('degree', $item->degree)->where('institude', $item->institude)->first();
-                if (!$qual) {
-                    Qualification::updateOrCreate([
-                        'user_id' => $user->id,
-                        'degree' => $item->degree,
-                        'institude' => $item->institude,
-                        'year' => $item->year
-                    ]);
-                }
+            foreach ($user->qualifications as $item) {
+                $item->delete();
             }
-        }
-
-        if ($request->specifications) {
-            foreach ($request->specifications as $specification) {
-                Specification::updateOrCreate([
+            foreach ($request->qualifications as $item) {
+                Qualification::create([
                     'user_id' => $user->id,
-                    'spec_name' => $specification->spec_name,
-                    'exp' => $specification->exp
+                    'degree' => $item['degree'],
+                    'institude' => $item['institude'],
+                    'year' => $item['year']
                 ]);
             }
         }
 
+        if ($request->specifications) {
+            foreach ($user->specifications as $item) {
+                $item->delete();
+            }
+            foreach ($request->specifications as $specification) {
+                Specification::create([
+                    'user_id' => $user->id,
+                    'spec_name' => $specification['spec_name'],
+                    'exp' => $specification['exp']
+                ]);
+            }
+        }
 
         $user = User::find($user->id);
         $user->qualifications;
