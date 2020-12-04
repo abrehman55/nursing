@@ -60,7 +60,12 @@ class LocationController extends Controller
             return ($a->distance < $b->distance) ? -1 : 1;
         });
 
-        return Api::setResponse('nearby_hospitals', $sorted);
+        $data=[];
+        foreach($sorted as $sort ){ 
+            $data[]=$sort; 
+        }
+
+        return Api::setResponse('nearby_hospitals', $data);
     }
 
 
