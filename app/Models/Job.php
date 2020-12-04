@@ -22,6 +22,10 @@ class Job extends Model
        return $this->belongsTo(User::class);
    }
 
+   public function applicants(){
+       return $this->hasMany(ApplyRequest::class)->with('');
+   }
+
    public function getAppliedAttribute(){
         if(ApplyRequest::where('nurse_id',Auth::user()->id)->where('job_id', $this->id)->first())
             return true;

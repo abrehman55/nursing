@@ -52,6 +52,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::post('job/destroy', 'JobController@destroy');
         Route::post('job/update', 'JobController@update');
 
+        Route::post('job/details', 'JobController@details');
+
         Route::post('nearby/nurse', 'LocationController@nearbyNurses');
         Route::post('nearby/hospital', 'LocationController@nearbyHospitals');
         

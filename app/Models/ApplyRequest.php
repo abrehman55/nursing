@@ -10,4 +10,8 @@ class ApplyRequest extends Model
     protected $fillable = [
         'user_id','job_id','nurse_id'
     ];
+
+    public function nurse(){
+        return $this->belongsTo(User::class, 'nurse_id');
+    }
 }

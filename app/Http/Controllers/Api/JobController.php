@@ -118,4 +118,10 @@ class JobController extends Controller
         $user = User::find($request->user_id);
         return Api::setResponse('jobs',$user->jobs);
     }
+
+    public function details(Request $request){
+        $job = Job::find($request->job_id);
+        $job->applicants;
+        return Api::setResponse('job', $job);
+    }
 }
