@@ -58,7 +58,15 @@ class UserController extends Controller
     public function getProfile(Request $request)
     {
         $user = User::find($request->user_id);
+        $user->qualifications;
+        $user->specifications;
         $user->category;
+        $favorites=FavoriteNurse::where('user_id',$user->id)->first();
+        if($favorites){
+            $user->isFavorite=true;
+        }else{
+            $user->isFavorite=false;
+        }
         return Api::setResponse('user', $user);
     }
 
@@ -73,11 +81,12 @@ class UserController extends Controller
     {
         $user = Auth::guard('api')->user();
 
-        FavoriteNurse::create([
+      FavoriteNurse::create([
             'user_id' => $user->id,
             'nurse_id' => $request->nurse_id
         ]);
-        return Api::setMessage('Favorite Added successfully');
+        $user->isFavorite=true;
+        return Api::setResponse('favorite',$user);
     }
 
     public function getFavorite(Request $request)
@@ -85,7 +94,12 @@ class UserController extends Controller
         $user = Auth::guard('api')->user();
 
         $favorites = $user->favorites;
-        return Api::setResponse('favorites', $favorites);
+        $fav=[];
+        foreach ($favorites as $key => $favorit) {
+            $favorit->isFavorite =true;
+            $fav[]=$favorit;
+        }
+        return Api::setResponse('favorites', $fav);
     }
 
     public function updateNurse(Request $request)

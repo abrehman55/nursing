@@ -95,7 +95,7 @@ class User extends Authenticatable
     }
 
     public function favorites(){
-        return $this->belongsToMany(User::class,'favorite_nurses', 'user_id', 'nurse_id');
+        return $this->belongsToMany(User::class,'favorite_nurses', 'user_id', 'nurse_id')->with('category');
     }
     
 

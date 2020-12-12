@@ -98,7 +98,7 @@ class JobController extends Controller
     }
 
     public function fetch_jobs(){
-        $jobs = Job::where('status','!=','closed')->get();
+        $jobs = Job::where('status','!=','closed')->with('category')->get();
         foreach($jobs as $job){
             $job->user;
         }
@@ -106,13 +106,13 @@ class JobController extends Controller
     }
     
     public function jobs(){
-        $jobs = Job::where('user_id', Auth::user()->id)->get();
+        $jobs = Job::where('user_id', Auth::user()->id)->with('category')->get();
         // $jobs = Job::where('status','!=','closed')->where('user_id', Auth::user()->id)->get();
         return Api::setResponse('jobs',$jobs);
     }
     
     public function userJobs(Request $request){
-        $jobs = Job::where('status','!=','closed')->where('user_id', $request->user_id)->get();
+        $jobs = Job::where('status','!=','closed')->where('user_id', $request->user_id)->with('category')->get();
         return Api::setResponse('jobs',$jobs);
     }
 

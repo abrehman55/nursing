@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Api;
 use App\Helpers\Location;
 use App\Http\Controllers\Controller;
+use App\Models\FavoriteNurse;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,6 +18,12 @@ class LocationController extends Controller
         $nurses = User::where('genre','2')->with('category')->with('qualifications')->with('specifications')->get();
         
         foreach($nurses as $key => $nurse){
+            $favorit =FavoriteNurse::where('nurse_id',$nurse)->first();
+            if($favorit){
+                $nurse->isFavorite=true;
+            }else{
+                $nurse->isFavorite=false;
+            }
             $distance = Location::diatance($nurse->location, $user->location);
             if(!$distance)
                 $nurses->forget($key);
@@ -47,8 +54,13 @@ class LocationController extends Controller
     public function nearbyHospitals(Request $request){
         $user = Auth::guard('api')->user();
         $hospitals = User::where('type','2')->get();
-        
         foreach($hospitals as $key => $nurse){
+            $favorit =FavoriteNurse::where('nurse_id',$nurse)->first();
+            if($favorit){
+                $nurse->isFavorite=true;
+            }else{
+                $nurse->isFavorite=false;
+            }
             $distance = Location::diatance($nurse->location, $user->location);
             if(!$distance)
                 $hospitals->forget($key);

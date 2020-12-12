@@ -15,7 +15,13 @@ class Job extends Model
     ];
 
    protected $fillable = [
-       'user_id','title','pay','hours','description','status'
+       'user_id',
+       'title',
+       'pay',
+       'hours',
+       'description',
+       'status',
+       'category_id',
    ];
 
    protected $hidden = [
@@ -39,5 +45,9 @@ class Job extends Model
             return true;
         else
             return false;
+   }
+
+   public function category(){
+       return $this->belongsTo(Category::class,'category_id');
    }
 }

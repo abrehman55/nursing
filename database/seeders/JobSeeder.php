@@ -18,7 +18,8 @@ class JobSeeder extends Seeder
             'user_id' =>1,
             'title' =>'job',
             'pay' =>12000,
-            'hours' => 8
+            'hours' => 8,
+            'category_id'=>'2'
 
         ]);
     }
