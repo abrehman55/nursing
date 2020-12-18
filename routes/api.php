@@ -58,8 +58,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::post('nearby/hospital', 'LocationController@nearbyHospitals');
         
         Route::post('jobs', 'JobController@jobs');//Auth User jobs
+        Route::post('closed/jobs','JobController@userClosedJobs'); //Auth user cloased jobs
+
         Route::post('user/jobs', 'JobController@userJobs');//Any User jobs
-        Route::post('user/clased/jobs','JobController@userClosedJobs');
+        Route::post('closed/jobs','JobController@userClosedJobs');
 
 
         Route::post('hire/request', 'HireController@request');
