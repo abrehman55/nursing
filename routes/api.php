@@ -59,6 +59,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         
         Route::post('jobs', 'JobController@jobs');//Auth User jobs
         Route::post('user/jobs', 'JobController@userJobs');//Any User jobs
+        Route::post('user/clased/jobs','JobController@userClosedJobs');
 
 
         Route::post('hire/request', 'HireController@request');

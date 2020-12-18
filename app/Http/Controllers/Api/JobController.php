@@ -116,6 +116,13 @@ class JobController extends Controller
         return Api::setResponse('jobs',$jobs);
     }
 
+    public function userClosedJobs(Request $request){
+        $jobs = Job::where('status','closed')->where('user_id', $request->user_id)->with('category')->get();
+        return Api::setResponse('jobs',$jobs);
+
+        
+    }
+
     public function details(Request $request){
         $job = Job::find($request->job_id);
         $job->applicants = $job->applicants();
