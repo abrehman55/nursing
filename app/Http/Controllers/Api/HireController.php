@@ -24,7 +24,7 @@ class HireController extends Controller
 
     
     public function now(Request $request){
-        
+
         $user = Auth::guard('api')->user();
         Hired::create([
             'user_id' => Auth::user()->id
