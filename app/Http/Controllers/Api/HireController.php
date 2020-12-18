@@ -21,17 +21,23 @@ class HireController extends Controller
         ]);
         return Api::setMessage('Request Sent Successfully');
     }
+
     
     public function now(Request $request){
+        
         $user = Auth::guard('api')->user();
         Hired::create([
             'user_id' => Auth::user()->id
         ]+$request->all());
 
         $job = Job::find($request->job_id);
-        $job->update([
-            'status' => 'closed'
-        ]);
+        if($job){
+            $job->update([
+                'status' => 'closed'
+            ]);
+        }
+
+
         return Api::setMessage('Nurse hired successfully');
     }
 }
