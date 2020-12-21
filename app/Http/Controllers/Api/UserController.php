@@ -134,9 +134,9 @@ class UserController extends Controller
         }
 
 
-        $user = Auth::guard('api')->user();
-        $user->qualifications = $user->qualifications;
-        $user->specifications = $user->specifications;
+        $user = User::find(Auth::guard('api')->user()->id);
+        $user->qualifications;
+        $user->specifications;
         $user->category;
 
         return Api::setResponse('nurse', $user->withToken());
