@@ -24,10 +24,10 @@ class HireController extends Controller
     
     public function acceptRequest(Request $request){
         $hireRequest = HireRequest::find($request->hire_request_id);
-        $job = $hireRequest->job;
+        $job = Job::find($hireRequest->job_id);
         if($job){
             $job->update([
-                'status' => 'closed'
+                'status' => 0
             ]);
         }
         return Api::setMessage('request accepted successfully', $hireRequest);
@@ -42,7 +42,7 @@ class HireController extends Controller
         $job = Job::find($request->job_id);
         if($job){
             $job->update([
-                'status' => 'closed'
+                'status' => 0
             ]);
         }
         return Api::setMessage('Nurse hired successfully');
