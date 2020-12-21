@@ -10,4 +10,8 @@ class HireRequest extends Model
     protected $fillable = [
         'user_id','nurse_id','job_id',
     ];
+
+    public function job(){
+        return $this->belongsTo(Job::class);
+    }
 }

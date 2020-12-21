@@ -14,20 +14,29 @@ class HireController extends Controller
 {
     public function request(Request $request){
         $user = Auth::guard('api')->user();
-        HireRequest::create([
+        $hireRequest = HireRequest::create([
             'user_id' => $user->id,
             'nurse_id' => $request->nurse_id,
             'job_id' => $request->job_id
         ]);
-        return Api::setMessage('Request Sent Successfully');
+        return Api::setResponse('hireRequest', $hireRequest);
+    }
+    
+    public function acceptRequest(Request $request){
+        $hireRequest = HireRequest::find($request->hire_request_id);
+        $job = $hireRequest->job;
+        if($job){
+            $job->update([
+                'status' => 'closed'
+            ]);
+        }
+        return Api::setMessage('request accepted successfully', $hireRequest);
     }
 
     
     public function now(Request $request){
-
-        $user = Auth::guard('api')->user();
         Hired::create([
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id   
         ]+$request->all());
 
         $job = Job::find($request->job_id);
@@ -36,8 +45,6 @@ class HireController extends Controller
                 'status' => 'closed'
             ]);
         }
-
-
         return Api::setMessage('Nurse hired successfully');
     }
 }

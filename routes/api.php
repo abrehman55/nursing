@@ -65,6 +65,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
 
         Route::post('hire/request', 'HireController@request');
+        Route::post('hire/request/accept', 'HireController@acceptRequest');
         Route::post('hire/now', 'HireController@now');
 
 
