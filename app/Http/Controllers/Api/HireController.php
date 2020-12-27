@@ -23,6 +23,7 @@ class HireController extends Controller
     }
     
     public function acceptRequest(Request $request){
+        
         $hireRequest = HireRequest::find($request->hire_request_id);
         $job = Job::find($hireRequest->job_id);
         if($job){
@@ -30,11 +31,13 @@ class HireController extends Controller
                 'status' => 0
             ]);
         }
+        
         return Api::setMessage('request accepted successfully', $hireRequest);
     }
 
     
     public function now(Request $request){
+
         Hired::create([
             'user_id' => Auth::user()->id   
         ]+$request->all());
@@ -45,6 +48,7 @@ class HireController extends Controller
                 'status' => 0
             ]);
         }
+
         return Api::setMessage('Nurse hired successfully');
     }
 }

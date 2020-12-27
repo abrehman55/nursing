@@ -98,7 +98,14 @@ class JobController extends Controller
     }
 
     public function fetch_jobs(){
-        $jobs = Job::where('status','!=','closed')->with('category')->get();
+
+        $user = Auth::user();
+        if($user->cat_id == 4){
+            $jobs = Job::where('status','!=','closed')->where('category_id',4)->with('category')->get();
+        }
+        else {
+            $jobs = Job::where('status','!=','closed')->where('category_id','!=',4)->where('category_id',4)->with('category')->get();
+        }
         foreach($jobs as $job){
             $job->user;
         }
