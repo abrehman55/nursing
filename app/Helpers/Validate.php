@@ -30,6 +30,7 @@ class Validate {
         }
         else{     
             return [
+                'code' => rand(111111,999999),
                 'api_token' => Str::random(60),
                 'location' => $request->lat.', '.$request->long,
             ] + $request->all();

@@ -34,6 +34,7 @@ class UserController extends Controller
                 ]);
             }
         }
+        
 
         if ($request->specifications) {
             foreach ($user->specifications as $item) {
@@ -53,6 +54,17 @@ class UserController extends Controller
         $user->specifications;
         $user->category;
         return Api::setResponse('user', $user->withToken());
+    }
+
+    public function verify(Request $request){
+        $user = User::find($request->user_id);
+        $user->verified = true;
+        $user->save();
+
+        $user->qualifications;
+        $user->specifications;
+        $user->category;
+        return Api::setMessage('Verified successfully');
     }
 
     public function getProfile(Request $request)
