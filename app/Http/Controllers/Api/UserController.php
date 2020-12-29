@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Api;
+use App\Helpers\MailHelper;
 use App\Helpers\Validate;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -53,6 +54,8 @@ class UserController extends Controller
         $user->qualifications;
         $user->specifications;
         $user->category;
+
+        MailHelper::sendCode($user);
         return Api::setResponse('user', $user->withToken());
     }
 
