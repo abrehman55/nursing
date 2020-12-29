@@ -23,6 +23,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
     Route::post('user/register', 'UserController@store');
     Route::post('user/login', 'AuthController@login');
+    Route::post('user/verify', 'UserController@verify');
+
 
     // Route::post('nurse/register', 'NurseController@store');
     // Route::post('nurse/login', 'NurseAuthController@login');
