@@ -61,7 +61,10 @@ class UserController extends Controller
 
     public function verify(Request $request){
         $user = User::find($request->user_id);
-        $user->verified = true;
+        if($user->code == $request->code){
+            $user->verified = true;
+        }
+        
         $user->save();
 
         $user->qualifications;

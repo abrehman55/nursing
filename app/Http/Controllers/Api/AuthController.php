@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Api;
+use App\Helpers\MailHelper;
 use App\Helpers\Validate;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -18,9 +19,11 @@ class AuthController extends Controller
 
   
         if(Auth::guard('user')->attempt($credentials)){
+
+            
             $user = Auth::guard('user')->user();
             if(!$user->verified){
-
+                MailHelper::sendCode($user);
                 return Api::setError('Please verify email to continue','user',$user);
             }
                
