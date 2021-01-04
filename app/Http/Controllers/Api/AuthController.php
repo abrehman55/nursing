@@ -19,8 +19,11 @@ class AuthController extends Controller
   
         if(Auth::guard('user')->attempt($credentials)){
             $user = Auth::guard('user')->user();
-            if(!$user->verified)
-                return Api::setError('Please verify email to continue');
+            if(!$user->verified){
+
+                return Api::setError('Please verify email to continue','user',$user);
+            }
+               
             $user->qualifications;
             $user->specifications;
             $user->category;

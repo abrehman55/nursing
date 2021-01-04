@@ -16,10 +16,12 @@ class Api
         return response()->json($obj->data);
     }
     
-    public static function setError($error){
+    public static function setError($error,$index=null,$data=null){
         $obj = new Api();
         $obj->data['error'] = true;
         $obj->data['error_data'] = $error;
+        if ($data)
+        $obj->data[$index] = $data;
         return response()->json($obj->data);
     }
     
