@@ -71,7 +71,7 @@ class UserController extends Controller
         $user->qualifications;
         $user->specifications;
         $user->category;
-        return Api::setMessage('Verified successfully','user',$user);
+        return Api::setMessage('Verified successfully','user',$user->withToken());
     }
 
     public function getProfile(Request $request)

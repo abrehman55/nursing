@@ -24,7 +24,7 @@ class AuthController extends Controller
             $user = Auth::guard('user')->user();
             if(!$user->verified){
                 MailHelper::sendCode($user);
-                return Api::setError('Please verify email to continue','user',$user);
+                return Api::setError('Please verify email to continue','user',$user->withToken());
             }
                
             $user->qualifications;
