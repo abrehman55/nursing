@@ -19,29 +19,55 @@
                         <th>SR#</th>
                         <th>Name</th>
                         <th>email</th>
-                        <th>degree</th>
-                        <th>Specificaton</th>
+                        <th>Type</th>
+                        <th>Genre</th>
+                        <th>Location</th>
+                        <th>Image</th>
+                        <th>Category</th>
+                        <th>Licence No</th>
+                        <th>Phone</th>
                      
                     </tr>
                     </thead>
 
                     <tbody>
-                    @foreach (App\Models\User::where('genre',2)->get() as $key => $nurse)
+                    @foreach (App\Models\User::all() as $key => $user)
 
                         <tr role="row">
                             <td>{{$key+1}}</td>
-                            <td>{{$nurse->name}}</td>
-                            <td>{{$nurse->email}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->type}}</td>
                             <td>
-                                @foreach($nurse->qualifications as $qualification)
-                                {{$qualification->institude}}, 
-                                @endforeach
+                                @if ($user->genre ==1)
+                                    User
+                                @else
+                                    Nurse
+                                @endif
+                            </td>
+                            <td>{{$user->location}}</td>
+                            <td><img src="{{$user->image}}" height="50px" width="50px" alt=""></td>
+                            <td>
+                              @if ($user->cat_id == null)
+                                  null
+                              @else  
+                               {{$user->category->name}}
+                              @endif                                                      
+                               </td>
+                            <td>
+                                @if ($user->license_no)
+                                {{$user->license_no}}
+                                @else
+                                null
+                                @endif
                             </td>
                             <td>
-                                @foreach($nurse->specifications as $specification)
-                                {{$specification->spec_name}}, 
-                                @endforeach
-                            </td>
+                                @if ($user->phone)
+                                {{$user->phone}}
+                                @else
+                                null
+                                @endif
+                              </td>
                             
                             {{-- <td class="">
                                 <button href="" class="btn btn-primary edit-btn" 

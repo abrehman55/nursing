@@ -54,20 +54,8 @@
                                     
                                 </div>
 
-                                <div class="field-wrapper text-center keep-logged-in">
-                                    <div class="n-chk new-checkbox checkbox-outline-primary">
-                                        <label class="new-control new-checkbox checkbox-outline-primary">
-                                          <input type="checkbox" name="remember" class="new-control-input">
-                                          <span class="new-control-indicator"></span>Keep me logged in
-                                        </label>
-                                    </div>
-                                </div>
-
                             </div>
-                        </form>                        
-                        <p class="terms-conditions">© 2020 All Rights Reserved. 
-                            <a href="{{Request::url()}}">Nursing</a> Technologies</p>
-
+                        </form>   
                     </div>                    
                 </div>
             </div>

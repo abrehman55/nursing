@@ -89,7 +89,7 @@
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="customDropdown">
-                        <a class="dropdown-item" data-value="Settings" href="">Settings</a>
+                        <a class="dropdown-item" data-value="Settings" href="{{route('admin.profile')}}">Profile</a>
                         <a class="dropdown-item" data-value="Mail" href="{{route('logout')}}">Logout</a>
                     </div>
                 </li>
@@ -143,41 +143,74 @@
                     </li>
 
                     <li class="menu">
-
-                    <a href="{{route('nurse.index')}}" aria-expanded="false" class="dropdown-toggle">
+                        <a href="{{route('user.index')}}" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-                                <span>Nurses</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-move">
+                                    <polyline points="5 9 2 12 5 15"></polyline>
+                                    <polyline points="9 5 12 2 15 5"></polyline>
+                                    <polyline points="15 19 12 22 9 19"></polyline>
+                                    <polyline points="19 9 22 12 19 15"></polyline>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <line x1="12" y1="2" x2="12" y2="22"></line>
+                                </svg>
+                                <span>Users</span>
                             </div>
                         </a>
-
+                    </li>
+                    <li class="menu">
+                        <a href="{{route('job.index')}}" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-map">
+                                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                                    <line x1="8" y1="2" x2="8" y2="18"></line>
+                                    <line x1="16" y1="6" x2="16" y2="22"></line>
+                                </svg>
+                                <span>Jobs</span>
+                            </div>
+                        </a>
                     </li>
 
                     <li class="menu">
-                        <a href="#product" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <a href="{{route('admin.profile')}}" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                                <span>Category</span>
-                            </div>
-                            <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-chevron-right">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                    stroke-linejoin="round" class="feather feather-book">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                                 </svg>
+                                <span>Profile</span>
                             </div>
                         </a>
-                        <ul class="collapse submenu list-unstyled" id="product" data-parent="#accordionExample">
-                            <li>
-                                <a href=""> Add Category </a>
-                            </li>
-                            <li>
-                                <a href=""> All Categry </a>
-                            </li>
-
-                        </ul>
                     </li>
-{{-- 
+
+                    <li class="menu">
+                        <a href="{{route('logout')}}" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-cpu">
+                                    <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                                    <rect x="9" y="9" width="6" height="6"></rect>
+                                    <line x1="9" y1="1" x2="9" y2="4"></line>
+                                    <line x1="15" y1="1" x2="15" y2="4"></line>
+                                    <line x1="9" y1="20" x2="9" y2="23"></line>
+                                    <line x1="15" y1="20" x2="15" y2="23"></line>
+                                    <line x1="20" y1="9" x2="23" y2="9"></line>
+                                    <line x1="20" y1="14" x2="23" y2="14"></line>
+                                    <line x1="1" y1="9" x2="4" y2="9"></line>
+                                    <line x1="1" y1="14" x2="4" y2="14"></line>
+                                </svg>
+                                <span>Logout</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    {{-- 
                     <li class="menu">
                         <a href="#sale" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
@@ -452,8 +485,7 @@
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="feather feather-heart">
 
-                            <path
-                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12
                                  5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06
                                   1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                             </path>
@@ -541,7 +573,7 @@
                                 <option value="2030">2030</option>
                             </select>
                         </div>
-                        
+
                         <div id="select_list3" class="form-group text-center">
                             <a id="paypal" class="btn btn-warning text-light paypal">Pay by PayPal</a>
                             <a id="card" class="btn btn-primary text-light paypal ">Pay by Card</a>

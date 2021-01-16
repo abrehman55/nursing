@@ -19,6 +19,9 @@ Route::post('login', 'App\Http\Controllers\AuthController@login')->name('login')
 
 Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth:admin'], function () {
     Route::view('/', 'dashboard')->name('dashboard');
-    Route::resource('nurse', 'Admin\NurseController');
+    Route::get('users/index', 'Admin\UserController@index')->name('user.index');
+    Route::get('admin/profile', 'Admin\AdminController@profile')->name('admin.profile');
+    Route::post('uppdate/profile', 'Admin\AdminController@update')->name('admin.update');
+    Route::get('job/index', 'Admin\JobController@index')->name('job.index');
     Route::get('logout', 'AuthController@logout')->name('logout');
 });
