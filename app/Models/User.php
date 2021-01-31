@@ -36,6 +36,7 @@ class User extends Authenticatable
         'cat_id',
         'license_no',
         'phone',
+        'balance',
     ];
 
     /**

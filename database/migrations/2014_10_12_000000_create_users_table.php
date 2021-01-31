@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('location')->nullable();
             $table->string('image')->default('assets/img/user/default.png');
             $table->string('firebase_token')->default('firebaseToken_here');
+            $table->bigInteger('balance')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

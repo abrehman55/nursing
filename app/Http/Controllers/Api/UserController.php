@@ -193,4 +193,13 @@ class UserController extends Controller
 
         return Api::setResponse('nurse', $nurse);
     }
+
+    public function update_amount(Request $request){
+
+        $user = User::find(Auth::user()->id);
+        $user->update([
+            'balance' => $request->amount
+        ]);
+        return Api::setMessage('Balance added succesfully');
+    }
 }

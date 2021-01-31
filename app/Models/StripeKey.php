@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hired extends Model
+class StripeKey extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'job_id',
-        'apply_request_id',
-        'nurse_id',
-        'completed'
+        'public_key',
+        'secret_key',
     ];
 }

@@ -35,12 +35,16 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
     Route::post('all/categories', 'CategoryController@show');
 
+    Route::post('get/stripe/keys', 'StripeController@getkey');
+
     Route::group(['middleware' => 'auth:api'], function () {
 
         Route::post('auth/profile', 'UserController@authProfile');
         Route::post('add/favorite', 'UserController@addFavorite');
         Route::post('get/favorites', 'UserController@getFavorite');
         Route::post('nurse/rating', 'UserController@nurse_rating');
+
+        Route::post('enter/balance', 'UserController@update_amount');
 
 
 
@@ -69,7 +73,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::post('hire/request', 'HireController@request');
         Route::post('hire/request/accept', 'HireController@acceptRequest');
         Route::post('hire/now', 'HireController@now');
-
+        Route::post('hire/complete', 'HireController@complete');
 
         Route::post('chat/index', 'User\ChatController@index');
         Route::post('message/index', 'User\MessageController@index');

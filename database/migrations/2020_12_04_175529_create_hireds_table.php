@@ -23,6 +23,7 @@ class CreateHiredsTable extends Migration
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
             $table->foreignId('apply_request_id');
             $table->foreign('apply_request_id')->references('id')->on('apply_requests')->onDelete('cascade');
+            $table->tinyInteger('completed')->default(false);
             $table->timestamps();
         });
     }

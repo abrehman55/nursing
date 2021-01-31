@@ -24,4 +24,5 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth:admin
     Route::post('uppdate/profile', 'Admin\AdminController@update')->name('admin.update');
     Route::get('job/index', 'Admin\JobController@index')->name('job.index');
     Route::get('logout', 'AuthController@logout')->name('logout');
+    Route::resource('stripe', 'Admin\StripeController');
 });
