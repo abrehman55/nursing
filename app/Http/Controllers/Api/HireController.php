@@ -121,4 +121,5 @@ class HireController extends Controller
 
         return Api::setMessage('Hiring Rejected');
     }
+    
 }
