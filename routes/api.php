@@ -74,10 +74,14 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::post('hire/request/accept', 'HireController@acceptRequest');
         Route::post('hire/now', 'HireController@now');
         Route::post('hire/complete', 'HireController@complete');
+        Route::post('hire/reject', 'HireController@reject');
 
         Route::post('chat/index', 'User\ChatController@index');
         Route::post('message/index', 'User\MessageController@index');
         Route::post('message/send', 'User\MessageController@store');
         Route::post('chat/delete', 'User\ChatController@delete');
+
+        Route::post('hospital/card/credential','UserController@hospital_card');
+        Route::post('nurse/card/credential','UserController@nurse_card');
     });
 });

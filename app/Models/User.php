@@ -37,6 +37,10 @@ class User extends Authenticatable
         'license_no',
         'phone',
         'balance',
+        'card_name',
+        'card_number',
+        'card_cvc',
+        'card_expiry',
     ];
 
     /**

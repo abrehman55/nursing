@@ -88,11 +88,11 @@ class HireController extends Controller
 
     public function complete(Request $request){
 
-        $hold = Hold::where('user_id',$request->user_id)->where('nurse_id', $request->nurse_id)->first();
+        $hold = Hold::where('user_id',$request->hospital_id)->where('nurse_id', $request->nurse_id)->first();
 
         $nurse = User::find($request->nurse_id);
         $nurse->update([
-            'balance' => $hold->amount,
+            'balance' =>$nurse->balance + $hold->amount,
         ]);
 
         $hired = Hired::where('nurse_id', $request->nurse_id)->first();
@@ -100,8 +100,25 @@ class HireController extends Controller
         $hired->update([
             'completed' => true,
         ]);
+
+        $hold->delete();
         
         return Api::setMessage('Hiring Completed');
 
+    }
+
+    public function reject(Request $request){
+
+        $hold = Hold::where('user_id',$request->hospital_id)->where('nurse_id', $request->nurse_id)->first();
+
+        $hospital = User::find($request->hospital_id);
+
+        $hospital->update([
+            'balance' =>$hospital->balance + $hold->amount,
+        ]);
+
+        $hold->delete();
+
+        return Api::setMessage('Hiring Rejected');
     }
 }

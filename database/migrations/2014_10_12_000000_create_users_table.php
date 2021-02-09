@@ -34,6 +34,10 @@ class CreateUsersTable extends Migration
             $table->string('image')->default('assets/img/user/default.png');
             $table->string('firebase_token')->default('firebaseToken_here');
             $table->bigInteger('balance')->nullable();
+            $table->string('card_name')->nullable();
+            $table->string('card_number')->nullable();
+            $table->integer('card_cvc')->nullable();
+            $table->date('card_expiry')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

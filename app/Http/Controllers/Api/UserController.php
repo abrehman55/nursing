@@ -202,4 +202,32 @@ class UserController extends Controller
         ]);
         return Api::setMessage('Balance added succesfully');
     }
+
+    public function hospital_card(Request $request){
+
+        $hospital = Auth::user();
+        $hospital->update([
+            'card_name' => $request->card_name,
+            'card_number' => $request->card_number,
+            'card_cvc' => $request->card_cvc,
+            'card_expiry' => $request->card_expiry,
+        ]);
+
+        return Api::setMessage('Hospital Card Credentials Updated');
+
+    }
+    
+    public function nurse_card(Request $request){
+
+        $nurse = Auth::user();
+        $nurse->update([
+            'card_name' => $request->card_name,
+            'card_number' => $request->card_number,
+            'card_cvc' => $request->card_cvc,
+            'card_expiry' => $request->card_expiry,
+        ]);
+
+        return Api::setMessage('Nurse Card Credentials Updated');
+
+    }
 }

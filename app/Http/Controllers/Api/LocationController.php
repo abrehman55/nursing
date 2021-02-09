@@ -88,8 +88,6 @@ class LocationController extends Controller
         return Api::setResponse('nearby_hospitals', $data);
     }
 
-
-
     public function sortByDistance($a, $b)
     {
         return $a->distance - $b->distance;
