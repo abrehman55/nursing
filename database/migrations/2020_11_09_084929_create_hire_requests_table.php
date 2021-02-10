@@ -21,6 +21,7 @@ class CreateHireRequestsTable extends Migration
             $table->foreign('nurse_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('job_id')->nullable();
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
+            $table->integer('amount');
             $table->timestamps();
         });
     }

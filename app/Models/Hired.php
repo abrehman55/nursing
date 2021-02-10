@@ -14,6 +14,7 @@ class Hired extends Model
         'job_id',
         'apply_request_id',
         'nurse_id',
-        'completed'
+        'completed',
+        'amount'
     ];
 }

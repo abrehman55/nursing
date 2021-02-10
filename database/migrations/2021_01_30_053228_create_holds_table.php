@@ -18,7 +18,8 @@ class CreateHoldsTable extends Migration
             $table->foreignId('nurse_id');
             $table->foreign('nurse_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); $table->foreignId('hire_id');
+            $table->foreign('hire_id')->references('id')->on('hireds')->onDelete('cascade');
             $table->bigInteger('amount');
             $table->timestamps();
         });

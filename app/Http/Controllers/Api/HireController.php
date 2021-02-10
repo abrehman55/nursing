@@ -20,7 +20,8 @@ class HireController extends Controller
         $hireRequest = HireRequest::create([
             'user_id' => $user->id,
             'nurse_id' => $request->nurse_id,
-            'job_id' => $request->job_id
+            'job_id' => $request->job_id,
+            'amount' => $request->amount
         ]);
         return Api::setResponse('hireRequest', $hireRequest);
     }
@@ -30,6 +31,14 @@ class HireController extends Controller
 
         $hireRequest = HireRequest::find($request->hire_request_id);
         $job = Job::find($hireRequest->job_id);
+
+        $hired = Hired::create([
+            'user_id' => Auth::user()->id,
+            'nurse_id' =>$hireRequest->nurse_id,
+            'job_id' =>$hireRequest->job_id,
+            'amount' =>$hireRequest->amount,
+        ] + $request->all());
+
         if ($job) {
             $job->update([
                 'status' => 0
@@ -38,26 +47,38 @@ class HireController extends Controller
         $hospital = User::find($request->user_id);
 
         if ($hospital->balance < $request->amount) {
-            return Api::setMessage('Hospital Balance is Low');
+            $response = new Api;
+            $response->add('error','Hospital Balance is Low');
+            $response->add('hospital',$hospital);
+            return $response->json();
         } else {
             $hospital->update([
                 'balance' => $hospital->balance - $request->amount,
             ]);
 
-            Hold::create([
+            $hold = Hold::create([
                 'user_id' => $hospital->id,
                 'nurse_id' => $hireRequest->nurse_id,
-                'amount' => $request->amount,
+                'amount' => $hireRequest->amount,
+                'hire_id' => $hired->id,
             ]);
         }
 
-        return Api::setMessage('request accepted successfully', $hireRequest);
+        // return Api::setMessage('request accepted successfully', $hireRequest);
+        $nurse = User::find($hireRequest->nurse_id);
+        $response = new Api;
+        $response->add('Success','Request Acepted');
+        $response->add('hospital',$hospital);
+        $response->add('nurse',$nurse);
+        $response->add('hold',$hold);
+        $response->add('hired',$hired);
+        return $response->json();
     }
 
     public function now(Request $request)
     {
 
-        Hired::create([
+        $hired = Hired::create([
             'user_id' => Auth::user()->id
         ] + $request->all());
 
@@ -70,32 +91,44 @@ class HireController extends Controller
         $hospital = User::find(Auth::user()->id);
 
         if ($hospital->balance < $request->amount) {
-            return Api::setMessage('Hospital Balance is Low');
+            $response = new Api;
+            $response->add('error','Hospital Balance is Low');
+            $response->add('hospital',$hospital);
+            return $response->json();
         } else {
             $hospital->update([
                 'balance' => $hospital->balance - $request->amount,
             ]);
 
-            Hold::create([
+            $hold = Hold::create([
                 'user_id' => $hospital->id,
                 'nurse_id' => $request->nurse_id,
                 'amount' => $request->amount,
+                'hire_id' => $hired->id,
             ]);
         }
 
-        return Api::setMessage('Nurse hired successfully');
+        // return Api::setMessage('Nurse hired successfully');
+        $nurse = User::find($request->nurse_id);
+        $response = new Api;
+        $response->add('Success','Request Acepted');
+        $response->add('hospital',$hospital);
+        $response->add('nurse',$nurse);
+        $response->add('hold',$hold);
+        $response->add('hired',$hired);
+        return $response->json();
     }
 
     public function complete(Request $request){
 
-        $hold = Hold::where('user_id',$request->hospital_id)->where('nurse_id', $request->nurse_id)->first();
+        $hold = Hold::where('hire_id',$request->hire_id)->first();
 
-        $nurse = User::find($request->nurse_id);
+        $nurse = User::find($hold->nurse_id);
         $nurse->update([
             'balance' =>$nurse->balance + $hold->amount,
         ]);
 
-        $hired = Hired::where('nurse_id', $request->nurse_id)->first();
+        $hired = Hired::find($request->hire_id);
 
         $hired->update([
             'completed' => true,
@@ -103,15 +136,25 @@ class HireController extends Controller
 
         $hold->delete();
         
-        return Api::setMessage('Hiring Completed');
+        // return Api::setMessage('Hiring Completed');
+
+        $hospital = User::find($hold->hospital_id);
+        $response = new Api;
+        $response->add('Success','Request Acepted');
+        $response->add('hospital',$hospital);
+        $response->add('nurse',$nurse);
+        return $response->json();
 
     }
 
     public function reject(Request $request){
 
-        $hold = Hold::where('user_id',$request->hospital_id)->where('nurse_id', $request->nurse_id)->first();
+        $hold = Hold::where('hire_id',$request->hire_id)->first();
+      
 
-        $hospital = User::find($request->hospital_id);
+        $hospital = User::find($hold->user_id);
+        // dd($hospital);
+        $nurse = User::find($hold->nurse_id);
 
         $hospital->update([
             'balance' =>$hospital->balance + $hold->amount,
@@ -119,7 +162,12 @@ class HireController extends Controller
 
         $hold->delete();
 
-        return Api::setMessage('Hiring Rejected');
+        // return Api::setMessage('Hiring Rejected');
+        $response = new Api;
+        $response->add('Success','Request Acepted');
+        $response->add('hospital',$hospital);
+        $response->add('nurse',$nurse);
+        return $response->json();
     }
     
 }

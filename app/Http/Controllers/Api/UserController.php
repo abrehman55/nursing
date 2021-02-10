@@ -213,7 +213,12 @@ class UserController extends Controller
             'card_expiry' => $request->card_expiry,
         ]);
 
-        return Api::setMessage('Hospital Card Credentials Updated');
+        // return Api::setMessage('Hospital Card Credentials Updated');
+        
+        $response = new Api;
+        $response->add('success','Hospital Card Credentials Updated');
+        $response->add('hospital',$hospital);
+        return $response->json();
 
     }
     
@@ -227,7 +232,35 @@ class UserController extends Controller
             'card_expiry' => $request->card_expiry,
         ]);
 
-        return Api::setMessage('Nurse Card Credentials Updated');
+        // return Api::setMessage('Nurse Card Credentials Updated');
+        $nurse->qualifications;
+        $nurse->specifications;
+        $nurse->category;
+        $response = new Api;
+        $response->add('success','Nurse Card Credentials Updated');
+        $response->add('nurse',$nurse);
+        return $response->json();
 
     }
+
+    public function getWalet(Request $request){
+
+        $user = Auth::user();
+        return Api::setResponse('user', $user);
+    }
+
+    // public function deleteCard(Request $request){
+
+    //     $user = Auth::user();
+    //     $user->update([
+    //         'card_name' => null,
+    //         'card_number' => null,
+    //         'card_cvc' => null,
+    //         'card_expiry' => null,
+    //     ]);
+    //     return Api::setResponse('user', $user);
+
+    // }
+
+
 }

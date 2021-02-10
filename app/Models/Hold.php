@@ -9,9 +9,10 @@ class Hold extends Model
 {
     use HasFactory;
 
-    protected $appends = [
+    protected $fillable = [
         'nurse_id',
         'user_id',
         'amount',
+        'hire_id'
     ];
 }
