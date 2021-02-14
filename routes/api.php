@@ -85,5 +85,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::post('nurse/card/credential','UserController@nurse_card');
 
         Route::post('get/wallet/','UserController@getWalet');
+
+        Route::post('reject/request','HireController@RejectHireRequest');
     });
 });

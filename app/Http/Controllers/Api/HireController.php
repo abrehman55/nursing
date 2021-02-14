@@ -21,7 +21,8 @@ class HireController extends Controller
             'user_id' => $user->id,
             'nurse_id' => $request->nurse_id,
             'job_id' => $request->job_id,
-            'amount' => $request->amount
+            'amount' => $request->amount,
+            'status' => true
         ]);
         return Api::setResponse('hireRequest', $hireRequest);
     }
@@ -170,4 +171,15 @@ class HireController extends Controller
         return $response->json();
     }
     
+    public function RejectHireRequest(Request $request){
+        $hireRequest = HireRequest::find($request->hire_request_id);
+
+        $hireRequest->update([
+            'status' => false
+        ]);
+        $response = new Api;
+        $response->add('Rejected','Hire Request Rejected by Nurse');
+        $response->add('hire request',$hireRequest);
+        return $response->json();
+    }
 }

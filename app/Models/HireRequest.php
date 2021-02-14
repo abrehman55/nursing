@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class HireRequest extends Model
 {
     protected $fillable = [
-        'user_id','nurse_id','job_id','amount'
+        'user_id','nurse_id','job_id','amount','status'
     ];
 
     public function job(){
