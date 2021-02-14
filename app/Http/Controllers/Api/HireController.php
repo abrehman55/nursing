@@ -33,7 +33,7 @@ class HireController extends Controller
         $job = Job::find($hireRequest->job_id);
 
         $hired = Hired::create([
-            'user_id' => Auth::user()->id,
+            'user_id' =>$hireRequest->user_id,
             'nurse_id' =>$hireRequest->nurse_id,
             'job_id' =>$hireRequest->job_id,
             'amount' =>$hireRequest->amount,
@@ -44,7 +44,7 @@ class HireController extends Controller
                 'status' => 0
             ]);
         }
-        $hospital = User::find($request->user_id);
+        $hospital = User::find($hireRequest->user_id);
 
         if ($hospital->balance < $request->amount) {
             $response = new Api;
@@ -64,7 +64,7 @@ class HireController extends Controller
             ]);
         }
 
-        // return Api::setMessage('request accepted successfully', $hireRequest);
+       
         $nurse = User::find($hireRequest->nurse_id);
         $response = new Api;
         $response->add('Success','Request Acepted');
