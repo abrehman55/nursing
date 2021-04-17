@@ -2,3 +2,9 @@
   RewriteEngine On
   RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
+# DO NOT REMOVE THIS LINE AND THE LINES BELLOW SSL_REDIRECT:nursing.triteckodes.store
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} (www\.)?nursing.triteckodes.store
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# DO NOT REMOVE THIS LINE AND THE LINES BELLOW SSL_REDIRECT:nursing.triteckodes.store
